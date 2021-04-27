@@ -1,9 +1,11 @@
 import React from "react";
+import AutoCompleteText from "../../components/autoCompleteText/autoCompleteText";
+import cities from "../../components/cities.js";
 
 function HomePage() {
   return (
     <div>
-      <h1>Home Page</h1>
+      <AutoCompleteText items={cities} />
     </div>
   );
 }
