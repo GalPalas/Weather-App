@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { apiCallBegan } from "./api";
+import { dataWasBrought } from "../../config.json";
 import moment from "moment";
 
 const slice = createSlice({
@@ -31,7 +32,7 @@ export const loadWeatherData = () => (dispatch, getState) => {
   const { lastFetch } = getState().entities.weather;
 
   const diffInMinutes = moment().diff(moment(lastFetch), "minutes");
-  if (diffInMinutes < 10) return; // change the number and and this to config file
+  if (diffInMinutes < dataWasBrought) return; // change the number and and this to config file
 
   dispatch(apiCallBegan()); //send here path
 };
