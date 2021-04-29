@@ -1,7 +1,8 @@
 import axios from "axios";
-import * as actions from "../api";
+import { apiUrl, apiKey } from "../../config.json";
+import * as actions from "../currentWeather/api";
 
-const api = ({ dispatch }) => (next) => async (action) => {
+const locationKey = ({ dispatch }) => (next) => async (action) => {
   if (action.type !== actions.apiCallBegan.type) return next(action);
 
   dispatch(actions.apiCallRequested());
@@ -10,8 +11,7 @@ const api = ({ dispatch }) => (next) => async (action) => {
 
   try {
     const response = await axios.request({
-      baseURL:
-        "http://dataservice.accuweather.com/locations/v1/328328?apikey=iYRAfMnecHCV8i01yjyD1GgVE6mamwAW",
+      baseURL: `${apiUrl}/328328?apikey=${apiKey}`,
     });
     dispatch(actions.apiCallSuccess(response.data));
   } catch (error) {
@@ -19,4 +19,4 @@ const api = ({ dispatch }) => (next) => async (action) => {
   }
 };
 
-export default api;
+export default locationKey;

@@ -1,10 +1,11 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import reducer from "./reducer";
-import api from "./middleware/api";
+import locationKey from "./middleware/locationKey";
+import coordinates from "./middleware/coordinates";
 
 export default function configureAppStore() {
   return configureStore({
     reducer,
-    middleware: [...getDefaultMiddleware(), api],
+    middleware: [...getDefaultMiddleware(), coordinates, locationKey],
   });
 }
