@@ -1,6 +1,8 @@
 {
   "apiKey": "iYRAfMnecHCV8i01yjyD1GgVE6mamwAW",
   "apiUrl": "http://dataservice.accuweather.com/locations/v1",
-  "geoEndpoint": "/cities/geoposition/search",
+  "geoUrl": "http://dataservice.accuweather.com",
+  "apiEndpoint": "/cities/geoposition/search",
+  "geoEndpoint": "currentconditions/v1",
   "dataWasBrought": 10
 }

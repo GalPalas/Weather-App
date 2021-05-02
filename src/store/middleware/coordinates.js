@@ -1,18 +1,19 @@
 import axios from "axios";
-import { apiUrl, geoEndpoint, apiKey } from "../../config.json";
-import * as actions from "../geoPosition/geo";
+import { apiUrl, apiEndpoint, apiKey } from "../../config.json";
+import * as actions from "../currentWeather/api";
+import { loadWeatherData } from "../currentWeather/weather";
 
 const geo = ({ dispatch }) => (next) => async (action) => {
-  if (action.type !== actions.geopositionCallBegan.type) return next(action);
+  if (action.type !== actions.geoPositionCallBegan.type) return next(action);
   const { lat, lon } = action.payload;
-  dispatch(actions.geopositionCallRequested());
   next(action);
 
   try {
     const response = await axios.request({
-      baseURL: `${apiUrl}${geoEndpoint}?apikey=${apiKey}&q=${lat}%2C${lon}&details=true`,
+      baseURL: `${apiUrl}${apiEndpoint}?apikey=${apiKey}&q=${lat}%2C${lon}&details=true`,
     });
     dispatch(actions.geopositionCallSuccess(response.data));
+    dispatch(loadWeatherData());
   } catch (error) {
     dispatch(actions.geopositionCallFailed(error.message));
   }

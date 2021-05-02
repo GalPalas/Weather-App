@@ -1,12 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { apiCallBegan } from "./api";
+import { apiCallBegan, geoPositionCallBegan } from "./api";
 import { dataWasBrought } from "../../config.json";
+import { toast } from "react-toastify";
+import { createSelector } from "reselect";
 import moment from "moment";
 
 const slice = createSlice({
-  name: "currentWeather",
+  name: "weather",
   initialState: {
-    list: [],
+    conditions: [],
+    coordinates: [],
     loading: false,
     lastFetch: null,
   },
@@ -15,24 +18,76 @@ const slice = createSlice({
       weather.loading = true;
     },
     callSuccess: (weather, action) => {
-      weather.list = action.payload;
+      weather.conditions = action.payload;
       weather.loading = false;
       weather.lastFetch = Date.now();
     },
     callFailed: (weather, action) => {
       weather.loading = false;
     },
+
+    geoCallSuccess: (weather, action) => {
+      weather.coordinates = action.payload;
+    },
   },
 });
 
-export const { callRequested, callSuccess, callFailed } = slice.actions;
+export const {
+  callRequested,
+  callSuccess,
+  callFailed,
+  geoCallSuccess,
+} = slice.actions;
 export default slice.reducer;
 
+/* Get the current weather by location key */
 export const loadWeatherData = () => (dispatch, getState) => {
-  const { lastFetch } = getState().entities.weather;
+  const { Key } = getState().entities.weather.coordinates;
 
-  const diffInMinutes = moment().diff(moment(lastFetch), "minutes");
-  if (diffInMinutes < dataWasBrought) return; // change the number and and this to config file
+  broughtData();
 
-  dispatch(apiCallBegan()); //send here path
+  dispatch(
+    apiCallBegan({
+      locationKey: Key,
+    })
+  );
 };
+
+/* Get the current position by lan & lon */
+export const geoPositionData = () => (dispatch, getState) => {
+  if ("geolocation" in navigator) {
+    navigator.geolocation.getCurrentPosition((position) => {
+      const { latitude, longitude } = position.coords;
+
+      broughtData();
+
+      dispatch(
+        geoPositionCallBegan({
+          lat: latitude,
+          lon: longitude,
+        })
+      );
+    });
+  } else {
+    toast.error("Sorry, position is not available");
+  }
+};
+
+/* brought updated data after 10 minutes*/
+const broughtData = () => (getState) => {
+  const { lastFetch } = getState().entities.weather;
+  const diffInMinutes = moment().diff(moment(lastFetch), "minutes");
+  if (diffInMinutes < dataWasBrought) return;
+};
+
+export const getCoordinates = () =>
+  createSelector(
+    (state) => state.entities.weather.coordinates,
+    (coordinates) => coordinates
+  );
+
+export const getConditions = () =>
+  createSelector(
+    (state) => state.entities.weather.conditions,
+    (conditions) => conditions
+  );

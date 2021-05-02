@@ -1,8 +1,7 @@
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { loadWeatherData } from "./store/currentWeather/weather";
-import { geopositionData } from "./store/geoPosition/location";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { geoPositionData } from "./store/currentWeather/weather";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 import Navbar from "./components/navbar/navbar";
 import HomePage from "./pages/home/homePage";
 
@@ -10,8 +9,7 @@ function App() {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(geopositionData());
-    dispatch(loadWeatherData());
+    dispatch(geoPositionData());
   }, [dispatch]);
 
   return (

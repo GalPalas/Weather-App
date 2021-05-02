@@ -1,6 +1,12 @@
 import { createAction } from "@reduxjs/toolkit";
 
-export const apiCallRequested = createAction("currentWeather/callRequested");
-export const apiCallBegan = createAction("currentWeather/callBegan");
-export const apiCallSuccess = createAction("currentWeather/callSuccess");
-export const apiCallFailed = createAction("currentWeather/callFailed");
+/* Actions for current weather*/
+export const apiCallRequested = createAction("weather/callRequested");
+export const apiCallBegan = createAction("weather/callBegan");
+export const apiCallSuccess = createAction("weather/callSuccess");
+export const apiCallFailed = createAction("weather/callFailed");
+
+/* Actions for coordinates*/
+export const geoPositionCallBegan = createAction("weather/geoCallBegan");
+export const geopositionCallSuccess = createAction("weather/geoCallSuccess");
+export const geopositionCallFailed = createAction("weather/geoCallFailed");
