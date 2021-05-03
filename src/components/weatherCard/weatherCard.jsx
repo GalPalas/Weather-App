@@ -4,8 +4,9 @@ import {
   getCoordinates,
   getConditions,
 } from "../../store/currentWeather/weather.js";
-import { dateBuilder } from "./utils.js";
+import { dateBuilder, getWeatherIcon } from "./utils.js";
 import _ from "lodash";
+import "./weatherCard.css";
 
 function WeatherCard() {
   const coordinates = useSelector(getCoordinates());
@@ -16,6 +17,7 @@ function WeatherCard() {
 
   const temp = _.get(conditions, "[0].Temperature.Metric.Value");
   const desc = _.get(conditions, "[0].WeatherText");
+  const icon = _.get(conditions, "[0].WeatherIcon");
 
   return (
     <div>
@@ -31,6 +33,7 @@ function WeatherCard() {
                   <p className="card-date">{dateBuilder(new Date())}</p>
                   <h1>{Math.round(temp)}°c</h1>
                   <h2>{desc}</h2>
+                  {getWeatherIcon(icon)}
                 </div>
               </div>
             </div>
