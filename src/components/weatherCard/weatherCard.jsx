@@ -1,11 +1,11 @@
 import React from "react";
+import _ from "lodash";
 import { useSelector } from "react-redux";
 import {
   getCoordinates,
   getConditions,
 } from "../../store/currentWeather/weather.js";
 import { dateBuilder, getWeatherIcon } from "./utils.js";
-import _ from "lodash";
 import "./weatherCard.css";
 
 function WeatherCard() {
@@ -27,12 +27,12 @@ function WeatherCard() {
             <div className="col-8">
               <div className="card">
                 <div className="card-body">
-                  <h5 className="card-title">
+                  <p className="card-title">
                     {city}, {country}
-                  </h5>
+                  </p>
                   <p className="card-date">{dateBuilder(new Date())}</p>
-                  <h1>{Math.round(temp)}°c</h1>
-                  <h2>{desc}</h2>
+                  <p className="card-temp">{Math.round(temp)}°c</p>
+                  <p className="card-desc">{desc}</p>
                   {getWeatherIcon(icon)}
                 </div>
               </div>
