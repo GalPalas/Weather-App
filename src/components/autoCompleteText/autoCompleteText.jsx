@@ -44,6 +44,7 @@ function AutoCompleteText({ items }) {
                 className="search form-control"
                 type="text"
                 value={text}
+                placeholder="Search city..."
                 onChange={onTextCanged}
               ></input>
               {renderSuggestions()}
