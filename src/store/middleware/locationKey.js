@@ -4,10 +4,9 @@ import * as actions from "../currentWeather/api";
 
 const locationKey = ({ dispatch }) => (next) => async (action) => {
   if (action.type !== actions.apiCallBegan.type) return next(action);
-
   const { Key } = action.payload;
-  dispatch(actions.apiCallRequested());
 
+  dispatch(actions.apiCallRequested());
   next(action);
 
   try {

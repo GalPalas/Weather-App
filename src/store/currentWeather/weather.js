@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { apiCallBegan, geoPositionCallBegan, citySearchCallBegan } from "./api";
+import { geoPositionCallBegan } from "./api";
 import { dataWasBrought } from "../../config.json";
 import { toast } from "react-toastify";
 import { createSelector } from "reselect";
@@ -26,7 +26,6 @@ const slice = createSlice({
     callFailed: (weather, action) => {
       weather.loading = false;
     },
-
     geoCallSuccess: (weather, action) => {
       weather.coordinates = action.payload;
     },
@@ -45,34 +44,11 @@ export const {
 } = slice.actions;
 export default slice.reducer;
 
-/* Get the current weather by location key */
-export const loadWeatherData = () => (dispatch, getState) => {
-  const { Key } = getState().entities.weather.coordinates;
-
-  broughtData();
-
-  dispatch(
-    apiCallBegan({
-      Key,
-    })
-  );
-};
-
-export const loadWeatherDataByCityName = (cityName) => (dispatch, getState) => {
-  // broughtData();
-  dispatch(
-    citySearchCallBegan({
-      cityName,
-    })
-  );
-};
-
 /* Get the current position by lan & lon */
 export const geoPositionData = () => (dispatch, getState) => {
   if ("geolocation" in navigator) {
     navigator.geolocation.getCurrentPosition((position) => {
       const { latitude, longitude } = position.coords;
-
       broughtData();
 
       dispatch(
