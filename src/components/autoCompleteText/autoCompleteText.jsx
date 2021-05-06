@@ -1,9 +1,12 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { loadWeatherDataByCityName } from "../../store/currentWeather/weather";
 import "./autoCompleteText.css";
 
 function AutoCompleteText({ items }) {
   const [suggestion, setSuggestion] = useState([]);
   const [text, setText] = useState("");
+  const dispatch = useDispatch();
 
   const onTextCanged = (e) => {
     const value = e.target.value;
@@ -32,6 +35,7 @@ function AutoCompleteText({ items }) {
   const suggestionSelected = (value) => {
     setText(value);
     setSuggestion([]);
+    dispatch(loadWeatherDataByCityName(value));
   };
 
   return (
