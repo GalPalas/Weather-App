@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { apiCallBegan, geoPositionCallBegan } from "./api";
+import { apiCallBegan, geoPositionCallBegan, citySearchCallBegan } from "./api";
 import { dataWasBrought } from "../../config.json";
 import { toast } from "react-toastify";
 import { createSelector } from "reselect";
@@ -10,6 +10,7 @@ const slice = createSlice({
   initialState: {
     conditions: [],
     coordinates: [],
+    search: [],
     loading: false,
     lastFetch: null,
   },
@@ -29,6 +30,9 @@ const slice = createSlice({
     geoCallSuccess: (weather, action) => {
       weather.coordinates = action.payload;
     },
+    searchCallSuccess: (weather, action) => {
+      weather.search = action.payload;
+    },
   },
 });
 
@@ -37,6 +41,7 @@ export const {
   callSuccess,
   callFailed,
   geoCallSuccess,
+  searchCallSuccess,
 } = slice.actions;
 export default slice.reducer;
 
@@ -48,7 +53,16 @@ export const loadWeatherData = () => (dispatch, getState) => {
 
   dispatch(
     apiCallBegan({
-      locationKey: Key,
+      Key,
+    })
+  );
+};
+
+export const loadWeatherDataByCityName = (cityName) => (dispatch, getState) => {
+  // broughtData();
+  dispatch(
+    citySearchCallBegan({
+      cityName,
     })
   );
 };

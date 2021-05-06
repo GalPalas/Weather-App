@@ -10,3 +10,8 @@ export const apiCallFailed = createAction("weather/callFailed");
 export const geoPositionCallBegan = createAction("weather/geoCallBegan");
 export const geopositionCallSuccess = createAction("weather/geoCallSuccess");
 export const geopositionCallFailed = createAction("weather/geoCallFailed");
+
+/* Actions for get location key by city name sreach */
+export const citySearchCallBegan = createAction("weather/searchCallBegan");
+export const citySearchCallSuccess = createAction("weather/searchCallSuccess");
+export const citySearchCallFailed = createAction("weather/searchCallFailed");
