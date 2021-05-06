@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { loadWeatherDataByCityName } from "../../store/currentWeather/weather";
+import { citySearchCallBegan } from "../../store/currentWeather/api";
 import "./autoCompleteText.css";
 
 function AutoCompleteText({ items }) {
@@ -35,7 +35,7 @@ function AutoCompleteText({ items }) {
   const suggestionSelected = (value) => {
     setText(value);
     setSuggestion([]);
-    dispatch(loadWeatherDataByCityName(value));
+    dispatch(citySearchCallBegan({ cityName: value }));
   };
 
   return (

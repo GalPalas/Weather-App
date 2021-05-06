@@ -1,5 +1,6 @@
 import axios from "axios";
 import { apiUrl, cityEndpoint, apiKey } from "../../config.json";
+import { toast } from "react-toastify";
 import * as actions from "../currentWeather/api";
 import _ from "lodash";
 
@@ -23,7 +24,7 @@ const citySearch = ({ dispatch }) => (next) => async (action) => {
       })
     );
   } catch (error) {
-    // dispatch(actions.apiCallFailed(error.message));
+    toast.error(error.message);
   }
 };
 
