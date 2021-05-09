@@ -1,5 +1,5 @@
 {
-  "apiKey": "yHeOU7b80pyZEg4ShtVfAGTS7FbTjHKD",
+  "apiKey": "TmVGxtCQRBTjFirIGnAEoklYSE2Cqbsc",
   "apiUrl": "http://dataservice.accuweather.com/locations/v1",
   "geoUrl": "http://dataservice.accuweather.com",
   "apiEndpoint": "cities/geoposition/search",

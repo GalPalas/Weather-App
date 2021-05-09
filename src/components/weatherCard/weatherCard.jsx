@@ -4,7 +4,7 @@ import {
   getCoordinates,
   getConditions,
 } from "../../store/currentWeather/weather.js";
-import { dateBuilder, getWeatherIcon } from "./utils.js";
+import { dateBuilder, getWeatherIcon } from "../utils.js";
 import _ from "lodash";
 import "./weatherCard.css";
 

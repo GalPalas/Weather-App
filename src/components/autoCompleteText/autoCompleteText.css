@@ -13,6 +13,8 @@
 
 .cities li {
   padding: 10px 5px;
+  font-weight: 700;
+  color: white;
   cursor: pointer;
 }
 
