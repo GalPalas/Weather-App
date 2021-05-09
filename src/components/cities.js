@@ -187,6 +187,7 @@ Lewisville
 Lexington
 Lincoln
 Little Rock
+London
 Long Beach
 Lorain
 Los Angeles
@@ -263,6 +264,7 @@ Palmdale
 Panama City
 Pasadena
 Paterson
+Paris
 Pembroke Pines
 Pensacola
 Peoria
@@ -347,6 +349,7 @@ Syracuse
 Tacoma
 Tallahassee
 Tampa
+Tel Aviv
 Temecula
 Tempe
 Thornton
