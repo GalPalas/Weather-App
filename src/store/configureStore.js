@@ -1,7 +1,8 @@
 import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
 import reducer from "./reducer";
-import locationKey from "./middleware/locationKey";
 import coordinates from "./middleware/coordinates";
+import locationKey from "./middleware/locationKey";
+import forecast from "./middleware/forecast";
 import citySearch from "./middleware/citySearch";
 
 export default function configureAppStore() {
@@ -11,6 +12,7 @@ export default function configureAppStore() {
       ...getDefaultMiddleware(),
       coordinates,
       locationKey,
+      forecast,
       citySearch,
     ],
   });

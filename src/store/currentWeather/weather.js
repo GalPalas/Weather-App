@@ -8,8 +8,9 @@ import moment from "moment";
 const slice = createSlice({
   name: "weather",
   initialState: {
-    conditions: [],
     coordinates: [],
+    conditions: [],
+    forecast: [],
     search: [],
     loading: false,
     lastFetch: null,
@@ -32,6 +33,9 @@ const slice = createSlice({
     searchCallSuccess: (weather, action) => {
       weather.search = action.payload;
     },
+    forecastCallSuccess: (weather, action) => {
+      weather.forecast = action.payload;
+    },
   },
 });
 
@@ -41,6 +45,7 @@ export const {
   callFailed,
   geoCallSuccess,
   searchCallSuccess,
+  forecastCallSuccess,
 } = slice.actions;
 export default slice.reducer;
 
@@ -80,4 +85,10 @@ export const getConditions = () =>
   createSelector(
     (state) => state.entities.weather.conditions,
     (conditions) => conditions
+  );
+
+export const getForecast = () =>
+  createSelector(
+    (state) => state.entities.weather.forecast,
+    (forecast) => forecast
   );

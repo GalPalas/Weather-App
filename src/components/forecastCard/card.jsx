@@ -1,13 +1,17 @@
 import React from "react";
+import { getWeatherIcon, getDayInWeek } from "../utils.js";
 
-function Card() {
+function Card({ dayInWeek, minValue, maxValue, iconDescription, iconNumber }) {
   return (
     <div className="card text-center">
       <div className="card-body">
-        <p>Sunday</p>
-        <p>dd/mm/yyyy</p>
-        <p>18°c</p>
-        <p>Clouds and sun</p>
+        <p className="days">{getDayInWeek(dayInWeek)}</p>
+
+        <p className="temperature">
+          {minValue} - {maxValue} °c
+        </p>
+        <p className="icon-description">{iconDescription}</p>
+        {getWeatherIcon(iconNumber)}
       </div>
     </div>
   );
