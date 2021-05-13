@@ -14,3 +14,10 @@ export const geopositionCallSuccess = createAction("weather/geoCallSuccess");
 export const citySearchCallBegan = createAction("weather/searchCallBegan");
 export const citySearchCallSuccess = createAction("weather/searchCallSuccess");
 export const citySearchCallFailed = createAction("weather/searchCallFailed");
+
+export const weatherForecastCallBegan = createAction(
+  "weather/forecastCallBegan"
+);
+export const weatherForecastCallSuccess = createAction(
+  "weather/forecastCallSuccess"
+);

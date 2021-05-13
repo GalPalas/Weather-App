@@ -7,3 +7,8 @@
 .forecast-card-date {
   font-size: 2rem;
 }
+
+img {
+  width: 64px;
+  height: 64px;
+}

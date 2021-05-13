@@ -2,6 +2,7 @@
   "apiKey": "TmVGxtCQRBTjFirIGnAEoklYSE2Cqbsc",
   "apiUrl": "http://dataservice.accuweather.com/locations/v1",
   "geoUrl": "http://dataservice.accuweather.com",
+  "forecastUrl": "http://dataservice.accuweather.com/forecasts/v1/daily/5day",
   "apiEndpoint": "cities/geoposition/search",
   "geoEndpoint": "currentconditions/v1",
   "cityEndpoint": "cities/search",

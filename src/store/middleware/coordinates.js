@@ -17,6 +17,7 @@ const geo = ({ dispatch }) => (next) => async (action) => {
 
     const Key = _.get(response.data, "Key");
     dispatch(actions.apiCallBegan({ Key }));
+    dispatch(actions.weatherForecastCallBegan({ Key }));
   } catch (error) {
     toast.error(error.message);
   }
