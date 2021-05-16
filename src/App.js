@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import Navbar from "./components/navbar/navbar";
 import HomePage from "./pages/home/homePage";
 import Forecast from "./pages/forecast/forecast";
+import Favorites from "./pages/favorites/Favorites";
 
 function App() {
   const dispatch = useDispatch();
@@ -20,6 +21,9 @@ function App() {
         <Switch>
           <Route path="/forecast">
             <Forecast />
+          </Route>
+          <Route path="/favorites">
+            <Favorites />
           </Route>
           <Route exact path="/">
             <HomePage />

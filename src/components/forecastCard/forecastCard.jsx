@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import Card from "./card";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
   getCoordinates,
   getForecast,
 } from "../../store/currentWeather/weather.js";
+import { cardAdded } from "../../store/favorites/card";
 import { dateBuilder } from "../utils.js";
+import Card from "./card";
 import _ from "lodash";
 import "./forecastCard.css";
 
@@ -19,6 +20,8 @@ function ForecastCard() {
   const country = _.get(coordinates, "Country.ID");
   const date = dateBuilder(new Date());
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
     setForecast(dailyForecasts);
   }, [setForecast, dailyForecasts]);
@@ -28,33 +31,36 @@ function ForecastCard() {
   }
 
   return (
-    <div>
-      <div className="container">
-        <div className="row justify-content-end">
-          <button className="btn btn-primary btn-lg ">Add To Favorites</button>
-        </div>
+    <div className="container">
+      <div className="row justify-content-end">
+        <button
+          className="btn btn-primary btn-lg"
+          onClick={() => dispatch(cardAdded({}))}
+        >
+          Add To Favorites
+        </button>
+      </div>
 
-        <div className="row text-center forecast-top">
-          <div className="col-md-12">
-            <p className="forecast-card-title">
-              {city}, {country}
-            </p>
-            <p className="forecast-card-date">{date}</p>
+      <div className="row text-center forecast-top">
+        <div className="col-md-12">
+          <p className="forecast-card-title">
+            {city}, {country}
+          </p>
+          <p className="forecast-card-date">{date}</p>
+        </div>
+      </div>
+      <div className="row justify-content-between">
+        {forecast.map((item) => (
+          <div className="col-2" key={item.EpochDate}>
+            <Card
+              dayInWeek={item.Date}
+              minValue={Math.round(item.Temperature.Minimum.Value)}
+              maxValue={Math.round(item.Temperature.Maximum.Value)}
+              iconDescription={item.Day.IconPhrase}
+              iconNumber={item.Day.Icon}
+            />
           </div>
-        </div>
-        <div className="row justify-content-between">
-          {forecast.map((item) => (
-            <div className="col-2" key={item.EpochDate}>
-              <Card
-                dayInWeek={item.Date}
-                minValue={Math.round(item.Temperature.Minimum.Value)}
-                maxValue={Math.round(item.Temperature.Maximum.Value)}
-                iconDescription={item.Day.IconPhrase}
-                iconNumber={item.Day.Icon}
-              />
-            </div>
-          ))}
-        </div>
+        ))}
       </div>
     </div>
   );
