@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { createSelector } from "reselect";
 
 let lastId = 0;
 
@@ -7,9 +8,10 @@ const slice = createSlice({
   initialState: [],
   reducers: {
     cardAdded: (cards, action) => {
+      const { city } = action.payload;
       cards.push({
         id: ++lastId,
-        city: action.payload,
+        city,
       });
     },
   },
@@ -17,3 +19,9 @@ const slice = createSlice({
 
 export const { cardAdded } = slice.actions;
 export default slice.reducer;
+
+export const getFavoritesCards = () =>
+  createSelector(
+    (state) => state.entities.favoritesCards,
+    (favoritesCards) => favoritesCards
+  );

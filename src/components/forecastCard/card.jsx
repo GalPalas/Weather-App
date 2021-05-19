@@ -1,9 +1,10 @@
 import React from "react";
 import { getWeatherIcon, getDayInWeek } from "../utils.js";
+import "./card.css";
 
 function Card({ dayInWeek, minValue, maxValue, iconDescription, iconNumber }) {
   return (
-    <div className="card text-center">
+    <div className="card text-center forecast-cards">
       <div className="card-body">
         <p className="days">{getDayInWeek(dayInWeek)}</p>
 
