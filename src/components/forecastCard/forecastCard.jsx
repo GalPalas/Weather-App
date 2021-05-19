@@ -35,7 +35,7 @@ function ForecastCard() {
       <div className="row justify-content-end">
         <button
           className="btn btn-primary btn-lg"
-          onClick={() => dispatch(cardAdded({}))}
+          onClick={() => dispatch(cardAdded({ city }))}
         >
           Add To Favorites
         </button>
