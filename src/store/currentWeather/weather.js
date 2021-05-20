@@ -4,6 +4,9 @@ import { dataWasBrought } from "../../config.json";
 import { toast } from "react-toastify";
 import { createSelector } from "reselect";
 import moment from "moment";
+import _ from "lodash";
+import { weatherCardCallSuccess } from "../mainCard/actions";
+import { dateBuilder } from "../../components/utils";
 
 const slice = createSlice({
   name: "weather",
@@ -91,4 +94,39 @@ export const getForecast = () =>
   createSelector(
     (state) => state.entities.weather.forecast,
     (forecast) => forecast
+  );
+
+export const mainWeatherCardData = () => (dispatch, getState) => {
+  const { coordinates, conditions } = getState().entities.weather;
+
+  const ParentCity = _.get(coordinates, "ParentCity.EnglishName");
+  const ParentCountry = _.get(coordinates, "AdministrativeArea.EnglishName");
+
+  const key = _.get(coordinates, "Key");
+  const city = _.get(coordinates, "EnglishName");
+  const country = _.get(coordinates, "Country.ID");
+  const date = dateBuilder(new Date());
+  const temp = Math.round(_.get(conditions, "[0].Temperature.Metric.Value"));
+  const desc = _.get(conditions, "[0].WeatherText");
+  const icon = _.get(conditions, "[0].WeatherIcon");
+
+  dispatch(
+    weatherCardCallSuccess({
+      key,
+      city,
+      country,
+      date,
+      temp,
+      desc,
+      icon,
+      ParentCity,
+      ParentCountry,
+    })
+  );
+};
+
+export const getMainWeatherCardData = () =>
+  createSelector(
+    (state) => state.entities.weatherCard,
+    (weatherCard) => weatherCard
   );
