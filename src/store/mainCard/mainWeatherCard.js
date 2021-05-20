@@ -10,9 +10,32 @@ const slice = createSlice({
     temp: "",
     desc: "",
     icon: "",
+    ParentCity: "",
+    ParentCountry: "",
   },
   reducers: {
-    CardCallSuccess: (mainWeatherCard, action) => {},
+    CardCallSuccess: (mainWeatherCard, action) => {
+      const {
+        key,
+        city,
+        country,
+        date,
+        temp,
+        desc,
+        icon,
+        ParentCity,
+        ParentCountry,
+      } = action.payload;
+      mainWeatherCard.key = key;
+      mainWeatherCard.city = city;
+      mainWeatherCard.country = country;
+      mainWeatherCard.date = date;
+      mainWeatherCard.temp = temp;
+      mainWeatherCard.desc = desc;
+      mainWeatherCard.icon = icon;
+      mainWeatherCard.ParentCity = ParentCity;
+      mainWeatherCard.ParentCountry = ParentCountry;
+    },
   },
 });
 
