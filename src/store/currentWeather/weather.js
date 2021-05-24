@@ -1,12 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { geoPositionCallBegan } from "./api";
 import { dataWasBrought } from "../../config.json";
-import { toast } from "react-toastify";
 import { createSelector } from "reselect";
+import { weatherCardCallSuccess } from "../mainCard/actions";
+import { forecastCardCallSuccess } from "../forecastCards/actions";
+import { dateBuilder } from "../../components/utils";
+import { toast } from "react-toastify";
 import moment from "moment";
 import _ from "lodash";
-import { weatherCardCallSuccess } from "../mainCard/actions";
-import { dateBuilder } from "../../components/utils";
 
 const slice = createSlice({
   name: "weather",
@@ -78,6 +79,7 @@ const broughtData = () => (getState) => {
   if (diffInMinutes < dataWasBrought) return;
 };
 
+/*------------------- Selectors section -------------------------------*/
 export const getCoordinates = () =>
   createSelector(
     (state) => state.entities.weather.coordinates,
@@ -95,7 +97,9 @@ export const getForecast = () =>
     (state) => state.entities.weather.forecast,
     (forecast) => forecast
   );
+/*-------------------End Selectors section -------------------------------*/
 
+/*-------------------------- Current weather main card section --------------------------------------*/
 export const mainWeatherCardData = () => (dispatch, getState) => {
   const { coordinates, conditions } = getState().entities.weather;
 
@@ -130,3 +134,48 @@ export const getMainWeatherCardData = () =>
     (state) => state.entities.weatherCard,
     (weatherCard) => weatherCard
   );
+/*-------------------------- End Current weather main card section --------------------------------------*/
+
+/*-------------------------- Weather forecast section -------------------------------------------*/
+export const forecastWeatherCarsdData = () => (dispatch, getState) => {
+  const { coordinates, conditions } = getState().entities.weather;
+
+  const ParentCity = _.get(coordinates, "ParentCity.EnglishName");
+  const ParentCountry = _.get(coordinates, "AdministrativeArea.EnglishName");
+
+  const key = _.get(coordinates, "Key");
+  const city = _.get(coordinates, "EnglishName");
+  const country = _.get(coordinates, "Country.ID");
+  const date = dateBuilder(new Date());
+  const temp = Math.round(_.get(conditions, "[0].Temperature.Metric.Value"));
+  const desc = _.get(conditions, "[0].WeatherText");
+  const icon = _.get(conditions, "[0].WeatherIcon");
+
+  dispatch(
+    forecastCardCallSuccess({
+      key,
+      city,
+      country,
+      date,
+      temp,
+      desc,
+      icon,
+      ParentCity,
+      ParentCountry,
+    })
+  );
+};
+
+export const getDailyForecasts = () =>
+  createSelector(
+    (state) => state.entities.weather.forecast.DailyForecasts,
+    (DailyForecasts) => DailyForecasts
+  );
+
+export const getForecastsCardData = () =>
+  createSelector(
+    (state) => state.entities.forecastCard,
+    (forecastCard) => forecastCard
+  );
+
+/*-------------------------- End Weather forecast section -------------------------------------------*/

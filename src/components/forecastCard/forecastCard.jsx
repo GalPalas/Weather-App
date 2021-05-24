@@ -1,30 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
-  getCoordinates,
-  getForecast,
+  getDailyForecasts,
+  getForecastsCardData,
 } from "../../store/currentWeather/weather.js";
 import { cardAdded } from "../../store/favorites/card";
-import { dateBuilder } from "../utils.js";
 import Card from "./card";
-import _ from "lodash";
 import "./forecastCard.css";
 
 function ForecastCard() {
-  const [forecast, setForecast] = useState([]);
-  const coordinates = useSelector(getCoordinates());
-  const forecastsData = useSelector(getForecast());
-
-  const dailyForecasts = _.get(forecastsData, "DailyForecasts");
-  const city = _.get(coordinates, "EnglishName");
-  const country = _.get(coordinates, "Country.ID");
-  const date = dateBuilder(new Date());
+  const forecast = useSelector(getDailyForecasts());
+  const { city, country, date } = useSelector(getForecastsCardData());
 
   const dispatch = useDispatch();
-
-  useEffect(() => {
-    setForecast(dailyForecasts);
-  }, [setForecast, dailyForecasts]);
 
   if (forecast === undefined) {
     return <p>Loading Data...</p>;
