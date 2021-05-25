@@ -10,7 +10,17 @@ import "./forecastCard.css";
 
 function ForecastCard() {
   const forecast = useSelector(getDailyForecasts());
-  const { city, country, date } = useSelector(getForecastsCardData());
+  const {
+    key,
+    city,
+    country,
+    date,
+    temp,
+    desc,
+    icon,
+    ParentCity,
+    ParentCountry,
+  } = useSelector(getForecastsCardData());
 
   const dispatch = useDispatch();
 
@@ -23,7 +33,20 @@ function ForecastCard() {
       <div className="row justify-content-end">
         <button
           className="btn btn-primary btn-lg"
-          onClick={() => dispatch(cardAdded({ city }))}
+          onClick={() =>
+            dispatch(
+              cardAdded({
+                key,
+                city,
+                country,
+                temp,
+                desc,
+                icon,
+                ParentCity,
+                ParentCountry,
+              })
+            )
+          }
         >
           Add To Favorites
         </button>
