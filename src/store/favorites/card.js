@@ -1,23 +1,39 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { createSelector } from "reselect";
 
-let lastId = 0;
-
 const slice = createSlice({
-  name: "cards",
+  name: "favoritesCards",
   initialState: [],
   reducers: {
     cardAdded: (cards, action) => {
-      const { city } = action.payload;
-      cards.push({
-        id: ++lastId,
+      const {
+        key,
         city,
+        country,
+        temp,
+        desc,
+        icon,
+        ParentCity,
+        ParentCountry,
+      } = action.payload;
+      cards.push({
+        id: key,
+        city,
+        country,
+        temp,
+        desc,
+        icon,
+        ParentCity,
+        ParentCountry,
       });
+    },
+    cardRemoved: (cards, action) => {
+      return cards.filter((card) => card.id !== action.payload.id);
     },
   },
 });
 
-export const { cardAdded } = slice.actions;
+export const { cardAdded, cardRemoved } = slice.actions;
 export default slice.reducer;
 
 export const getFavoritesCards = () =>
