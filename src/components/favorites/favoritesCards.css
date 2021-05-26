@@ -1,8 +1,33 @@
+img {
+  width: 64px;
+  height: 64px;
+}
+
+i {
+  cursor: pointer;
+}
+
+h1 {
+  padding-top: 2rem;
+}
+
+.forecast-card-body {
+  width: 1rem;
+}
+
 .heading {
   margin-bottom: 2rem;
 }
 
-img {
-  width: 64px;
-  height: 64px;
+.city-country {
+  font-size: 2rem;
+}
+
+.temp {
+  font-size: 1.5rem;
+}
+
+.desc {
+  font-size: 1rem;
+  font-weight: bold;
 }

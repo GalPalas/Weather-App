@@ -60,9 +60,10 @@ function ForecastCard() {
           <p className="forecast-card-date">{date}</p>
         </div>
       </div>
+
       <div className="row justify-content-between">
         {forecast.map((item) => (
-          <div className="col-2" key={item.EpochDate}>
+          <div className="forecast-weather-cards " key={item.EpochDate}>
             <Card
               dayInWeek={item.Date}
               minValue={Math.round(item.Temperature.Minimum.Value)}
