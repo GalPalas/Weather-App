@@ -8,3 +8,5 @@ This project demonstrates the use of the Weather API which returns up - to - dat
  2. You can also see a forecast for the next 5 days according to your location or by searching for more cities, if you want to save the weather of a certain city you can click on      the button(Add to favorites)and this will add the weather of the same card to the favorites page(5 days forecast).
  3. In this window you will see all the weather cards you have saved(favorites).
 
+link:https://gal-weather.netlify.app
+
