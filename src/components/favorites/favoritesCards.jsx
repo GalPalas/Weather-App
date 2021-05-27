@@ -9,7 +9,6 @@ import "./favoritesCards.css";
 
 function FavoritesCards() {
   const history = useHistory();
-  console.log(history);
   const [favorites, setFavorites] = useState([]);
   const favoritesCardsData = useSelector(getFavoritesCards());
   const dispatch = useDispatch();
@@ -32,23 +31,39 @@ function FavoritesCards() {
       <div className="row justify-content-around">
         {favorites.map((card) => (
           <div className="col-3" key={card.id}>
-            <div className="card text-center">
+            <div className="card Favorites-cards text-center">
               <i
                 onClick={() => dispatch(cardRemoved({ id: card.id }))}
                 className="fa fa-times d-flex justify-content-start p-2 col-1"
                 aria-hidden="true"
               ></i>
-              <div
-                className="card-body"
-                onClick={() => handleFavoriteCardClick(card)}
-              >
-                <p className="city-country">
-                  {card.city},{card.country}
-                </p>
-                <p className="temp">{card.temp}</p>
-                <p className="desc">{card.desc}</p>
-                {getWeatherIcon(card.icon)}
-              </div>
+
+              {card.ParentCity === undefined ||
+              card.ParentCountry === undefined ? (
+                <div
+                  className="card-body"
+                  onClick={() => handleFavoriteCardClick(card)}
+                >
+                  <p className="city-country">
+                    {card.city},{card.country}
+                  </p>
+                  <p className="temp">{card.temp}</p>
+                  <p className="desc">{card.desc}</p>
+                  {getWeatherIcon(card.icon)}
+                </div>
+              ) : (
+                <div
+                  className="card-body"
+                  onClick={() => handleFavoriteCardClick(card)}
+                >
+                  <p className="city-country">
+                    {card.ParentCity},{card.ParentCountry}
+                  </p>
+                  <p className="temp">{card.temp}</p>
+                  <p className="desc">{card.desc}</p>
+                  {getWeatherIcon(card.icon)}
+                </div>
+              )}
             </div>
           </div>
         ))}
