@@ -52,14 +52,25 @@ function ForecastCard() {
         </button>
       </div>
 
-      <div className="row text-center forecast-top">
-        <div className="col-md-12">
-          <p className="forecast-card-title">
-            {city}, {country}
-          </p>
-          <p className="forecast-card-date">{date}</p>
+      {ParentCity === undefined || ParentCountry === undefined ? (
+        <div className="row text-center forecast-top">
+          <div className="col-md-12">
+            <p className="forecast-card-title">
+              {city}, {country}
+            </p>
+            <p className="forecast-card-date">{date}</p>
+          </div>
         </div>
-      </div>
+      ) : (
+        <div className="row text-center forecast-top">
+          <div className="col-md-12">
+            <p className="forecast-card-title">
+              {ParentCity}, {ParentCountry}
+            </p>
+            <p className="forecast-card-date">{date}</p>
+          </div>
+        </div>
+      )}
 
       <div className="row justify-content-between">
         {forecast.map((item) => (
